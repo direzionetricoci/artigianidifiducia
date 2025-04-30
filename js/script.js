@@ -2,43 +2,43 @@
 (function () {
 	// Global variables
 	var userAgent = navigator.userAgent.toLowerCase(),
-			initialDate = new Date(),
+		initialDate = new Date(),
 
-			$document = $(document),
-			$window = $(window),
-			$html = $("html"),
-			$body = $("body"),
+		$document = $(document),
+		$window = $(window),
+		$html = $("html"),
+		$body = $("body"),
 
-			isDesktop = $html.hasClass("desktop"),
-			isIE = userAgent.indexOf("msie") !== -1 ? parseInt(userAgent.split("msie")[1], 10) : userAgent.indexOf("trident") !== -1 ? 11 : userAgent.indexOf("edge") !== -1 ? 12 : false,
-			isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
-			windowReady = false,
-			isNoviBuilder = false,
+		isDesktop = $html.hasClass("desktop"),
+		isIE = userAgent.indexOf("msie") !== -1 ? parseInt(userAgent.split("msie")[1], 10) : userAgent.indexOf("trident") !== -1 ? 11 : userAgent.indexOf("edge") !== -1 ? 12 : false,
+		isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+		windowReady = false,
+		isNoviBuilder = false,
 
-			plugins = {
-				bootstrapTooltip: $("[data-toggle='tooltip']"),
-				materialParallax: $(".parallax-container"),
-				rdNavbar: $(".rd-navbar"),
-				maps: $(".google-map-container"),
-				rdMailForm: $(".rd-mailform"),
-				rdInputLabel: $(".form-label"),
-				regula: $("[data-constraints]"),
-				swiper: $(".swiper-slider"),
-				isotope: $(".isotope"),
-				radio: $("input[type='radio']"),
-				checkbox: $("input[type='checkbox']"),
-				customToggle: $("[data-custom-toggle]"),
-				captcha: $('.recaptcha'),
-				fixedHeight: $('[data-fixed-height]'),
-				lightGallery: $("[data-lightgallery='group']"),
-				lightGalleryItem: $("[data-lightgallery='item']"),
-				lightDynamicGalleryItem: $("[data-lightgallery='dynamic']"),
-				preloader: $(".preloader"),
-				copyrightYear: $(".copyright-year"),
-				wow: $(".wow"),
-				mailchimp: $('.mailchimp-mailform'),
-				campaignMonitor: $('.campaign-mailform'),
-			};
+		plugins = {
+			bootstrapTooltip: $("[data-toggle='tooltip']"),
+			materialParallax: $(".parallax-container"),
+			rdNavbar: $(".rd-navbar"),
+			maps: $(".google-map-container"),
+			rdMailForm: $(".rd-mailform"),
+			rdInputLabel: $(".form-label"),
+			regula: $("[data-constraints]"),
+			swiper: $(".swiper-slider"),
+			isotope: $(".isotope"),
+			radio: $("input[type='radio']"),
+			checkbox: $("input[type='checkbox']"),
+			customToggle: $("[data-custom-toggle]"),
+			captcha: $('.recaptcha'),
+			fixedHeight: $('[data-fixed-height]'),
+			lightGallery: $("[data-lightgallery='group']"),
+			lightGalleryItem: $("[data-lightgallery='item']"),
+			lightDynamicGalleryItem: $("[data-lightgallery='dynamic']"),
+			preloader: $(".preloader"),
+			copyrightYear: $(".copyright-year"),
+			wow: $(".wow"),
+			mailchimp: $('.mailchimp-mailform'),
+			campaignMonitor: $('.campaign-mailform'),
+		};
 
 
 	/**
@@ -82,8 +82,8 @@
 				classActive: 'animated',
 				conditions: function (event, link) {
 					return !/(\#|callto:|tel:|mailto:|:\/\/)/.test(link)
-							&& !event.currentTarget.hasAttribute('data-lightgallery')
-							&& !event.currentTarget.hasAttribute('data-lightbox');
+						&& !event.currentTarget.hasAttribute('data-lightgallery')
+						&& !event.currentTarget.hasAttribute('data-lightbox');
 				},
 				onTransitionStart: function (options) {
 					setTimeout(function () {
@@ -110,7 +110,7 @@
 		 */
 		function getSwiperHeight(object, attr) {
 			var val = object.attr("data-" + attr),
-					dim;
+				dim;
 
 			if (!val) {
 				return undefined;
@@ -140,9 +140,9 @@
 		 */
 		function toggleSwiperInnerVideos(swiper) {
 			var prevSlide = $(swiper.slides[swiper.previousIndex]),
-					nextSlide = $(swiper.slides[swiper.activeIndex]),
-					videos,
-					videoItems = prevSlide.find("video");
+				nextSlide = $(swiper.slides[swiper.activeIndex]),
+				videos,
+				videoItems = prevSlide.find("video");
 
 			for (var i = 0; i < videoItems.length; i++) {
 				videoItems[i].pause();
@@ -160,27 +160,27 @@
 		 */
 		function toggleSwiperCaptionAnimation(swiper) {
 			var prevSlide = $(swiper.container).find("[data-caption-animate]"),
-					nextSlide = $(swiper.slides[swiper.activeIndex]).find("[data-caption-animate]"),
-					delay,
-					duration,
-					nextSlideItem,
-					prevSlideItem;
+				nextSlide = $(swiper.slides[swiper.activeIndex]).find("[data-caption-animate]"),
+				delay,
+				duration,
+				nextSlideItem,
+				prevSlideItem;
 
 			for (var i = 0; i < prevSlide.length; i++) {
 				prevSlideItem = $(prevSlide[i]);
 
 				prevSlideItem.removeClass("animated")
-				.removeClass(prevSlideItem.attr("data-caption-animate"))
-				.addClass("not-animated");
+					.removeClass(prevSlideItem.attr("data-caption-animate"))
+					.addClass("not-animated");
 			}
 
 
 			var tempFunction = function (nextSlideItem, duration) {
 				return function () {
 					nextSlideItem
-					.removeClass("not-animated")
-					.addClass(nextSlideItem.attr("data-caption-animate"))
-					.addClass("animated");
+						.removeClass("not-animated")
+						.addClass(nextSlideItem.attr("data-caption-animate"))
+						.addClass("animated");
 					if (duration) {
 						nextSlideItem.css('animation-duration', duration + 'ms');
 					}
@@ -315,25 +315,25 @@
 
 			if (captchaToken.length === 0) {
 				captcha
-				.siblings('.form-validation')
-				.html('Please, prove that you are not robot.')
-				.addClass('active');
+					.siblings('.form-validation')
+					.html('Please, prove that you are not robot.')
+					.addClass('active');
 				captcha
-				.closest('.form-wrap')
-				.addClass('has-error');
+					.closest('.form-wrap')
+					.addClass('has-error');
 
 				captcha.on('propertychange', function () {
 					var $this = $(this),
-							captchaToken = $this.find('.g-recaptcha-response').val();
+						captchaToken = $this.find('.g-recaptcha-response').val();
 
 					if (captchaToken.length > 0) {
 						$this
-						.closest('.form-wrap')
-						.removeClass('has-error');
+							.closest('.form-wrap')
+							.removeClass('has-error');
 						$this
-						.siblings('.form-validation')
-						.removeClass('active')
-						.html('');
+							.siblings('.form-validation')
+							.removeClass('active')
+							.html('');
 						$this.off('propertychange');
 					}
 				});
@@ -350,41 +350,41 @@
 		window.onloadCaptchaCallback = function () {
 			for (var i = 0; i < plugins.captcha.length; i++) {
 				var
-						$captcha = $(plugins.captcha[i]),
-						resizeHandler = (function () {
-							var
-									frame = this.querySelector('iframe'),
-									inner = this.firstElementChild,
-									inner2 = inner.firstElementChild,
-									containerRect = null,
-									frameRect = null,
-									scale = null;
+					$captcha = $(plugins.captcha[i]),
+					resizeHandler = (function () {
+						var
+							frame = this.querySelector('iframe'),
+							inner = this.firstElementChild,
+							inner2 = inner.firstElementChild,
+							containerRect = null,
+							frameRect = null,
+							scale = null;
 
-							inner2.style.transform = '';
-							inner.style.height = 'auto';
-							inner.style.width = 'auto';
+						inner2.style.transform = '';
+						inner.style.height = 'auto';
+						inner.style.width = 'auto';
 
-							containerRect = this.getBoundingClientRect();
-							frameRect = frame.getBoundingClientRect();
-							scale = containerRect.width / frameRect.width;
+						containerRect = this.getBoundingClientRect();
+						frameRect = frame.getBoundingClientRect();
+						scale = containerRect.width / frameRect.width;
 
-							if (scale < 1) {
-								inner2.style.transform = 'scale(' + scale + ')';
-								inner.style.height = (frameRect.height * scale) + 'px';
-								inner.style.width = (frameRect.width * scale) + 'px';
-							}
-						}).bind(plugins.captcha[i]);
+						if (scale < 1) {
+							inner2.style.transform = 'scale(' + scale + ')';
+							inner.style.height = (frameRect.height * scale) + 'px';
+							inner.style.width = (frameRect.width * scale) + 'px';
+						}
+					}).bind(plugins.captcha[i]);
 
 				grecaptcha.render(
-						$captcha.attr('id'),
-						{
-							sitekey: $captcha.attr('data-sitekey'),
-							size: $captcha.attr('data-size') ? $captcha.attr('data-size') : 'normal',
-							theme: $captcha.attr('data-theme') ? $captcha.attr('data-theme') : 'light',
-							callback: function () {
-								$('.recaptcha').trigger('propertychange');
-							}
+					$captcha.attr('id'),
+					{
+						sitekey: $captcha.attr('data-sitekey'),
+						size: $captcha.attr('data-size') ? $captcha.attr('data-size') : 'normal',
+						theme: $captcha.attr('data-theme') ? $captcha.attr('data-theme') : 'light',
+						callback: function () {
+							$('.recaptcha').trigger('propertychange');
 						}
+					}
 				);
 
 				$captcha.after("<span class='form-validation'></span>");
@@ -485,18 +485,18 @@
 			try {
 				coordinates = JSON.parse(str);
 				callback(new google.maps.LatLng(
-						coordinates.lat,
-						coordinates.lng
+					coordinates.lat,
+					coordinates.lng
 				), marker, map)
 			} catch (e) {
-				map.geocoder.geocode({'address': str}, function (results, status) {
+				map.geocoder.geocode({ 'address': str }, function (results, status) {
 					if (status === google.maps.GeocoderStatus.OK) {
 						var latitude = results[0].geometry.location.lat();
 						var longitude = results[0].geometry.location.lng();
 
 						callback(new google.maps.LatLng(
-								parseFloat(latitude),
-								parseFloat(longitude)
+							parseFloat(latitude),
+							parseFloat(longitude)
 						), marker, map)
 					}
 				})
@@ -518,7 +518,7 @@
 
 			$.getScript('//maps.google.com/maps/api/js?' + (key ? 'key=' + key + '&' : '') + 'sensor=false&libraries=geometry,places&v=quarterly', function () {
 				var head = document.getElementsByTagName('head')[0],
-						insertBefore = head.insertBefore;
+					insertBefore = head.insertBefore;
 
 				head.insertBefore = function (newElement, referenceElement) {
 					if (newElement.href && newElement.href.indexOf('//fonts.googleapis.com/css?family=Roboto') !== -1 || newElement.innerHTML.indexOf('gm-style') !== -1) {
@@ -537,7 +537,7 @@
 						zoom: zoom,
 						styles: styles,
 						scrollwheel: false,
-						center: {lat: 0, lng: 0}
+						center: { lat: 0, lng: 0 }
 					});
 
 					// Add map object to map node
@@ -561,9 +561,15 @@
 							getLatLngObject(markerElement.getAttribute("data-location"), markerElement, plugins.maps[i], function (location, markerElement, mapElement) {
 								var icon = markerElement.getAttribute("data-icon") || mapElement.getAttribute("data-icon");
 								var activeIcon = markerElement.getAttribute("data-icon-active") || mapElement.getAttribute("data-icon-active");
-								var info = markerElement.getAttribute("data-description") || "";
+								var infoWindowContent = document.createElement('div');
+								infoWindowContent.className = 'custom-info-window';
+								infoWindowContent.innerHTML = `
+								<strong>Artigiani di Fiducia</strong><br>
+								Via Chiusa Nuova 40<br>
+								Castenaso (BO) 40055`;
 								var infoWindow = new google.maps.InfoWindow({
-									content: info
+									content: infoWindowContent,
+									maxWidth: 320
 								});
 								markerElement.infoWindow = infoWindow;
 								var markerData = {
@@ -575,7 +581,7 @@
 								}
 								var marker = new google.maps.Marker(markerData);
 								markerElement.gmarker = marker;
-								markers.push({markerElement: markerElement, infoWindow: infoWindow});
+								markers.push({ markerElement: markerElement, infoWindow: infoWindow });
 								marker.isActive = false;
 								// Handle infoWindow close click
 								google.maps.event.addListener(infoWindow, 'closeclick', (function (markerElement, mapElement) {
@@ -766,9 +772,9 @@
 			onSetTransition: function (swiper, speed) {
 				for (var i = 0; i < swiper.slides.length; i++) {
 					$(swiper.slides[i])
-					.find('.slide-inner')
-					.andSelf()
-					.css({transition: speed + 'ms'});
+						.find('.slide-inner')
+						.andSelf()
+						.css({ transition: speed + 'ms' });
 				}
 			},
 			onSlideNextStart: function (swiper) {
@@ -793,14 +799,14 @@
 			for (i = 0; i < plugins.swiper.length; i++) {
 				var s = $(plugins.swiper[i]);
 				var pag = s.find(".swiper-pagination"),
-						next = s.find(".swiper-button-next"),
-						prev = s.find(".swiper-button-prev"),
-						bar = s.find(".swiper-scrollbar"),
-						swiperSlide = s.find(".swiper-slide");
+					next = s.find(".swiper-button-next"),
+					prev = s.find(".swiper-button-prev"),
+					bar = s.find(".swiper-scrollbar"),
+					swiperSlide = s.find(".swiper-slide");
 
 				for (j = 0; j < swiperSlide.length; j++) {
 					var $this = $(swiperSlide[j]),
-							url;
+						url;
 
 					if (url = $this.attr("data-slide-bg")) {
 						$this.css({
@@ -811,9 +817,9 @@
 				}
 
 				swiperSlide.end()
-				.find("[data-caption-animate]")
-				.addClass("not-animated")
-				.end();
+					.find("[data-caption-animate]")
+					.addClass("not-animated")
+					.end();
 
 				var swiperOptions = {
 					autoplay: isNoviBuilder ? false : s.attr('data-autoplay') ? s.attr('data-autoplay') === "false" ? undefined : s.attr('data-autoplay') : 5000,
@@ -865,14 +871,14 @@
 				plugins.swiper[i] = s.swiper(swiperOptions);
 
 				$window
-				.on("resize", function () {
-					var mh = getSwiperHeight(s, "min-height"),
+					.on("resize", function () {
+						var mh = getSwiperHeight(s, "min-height"),
 							h = getSwiperHeight(s, "height");
-					if (h) {
-						s.css("height", mh ? mh > h ? mh : h : h);
-					}
-				})
-				.trigger("resize");
+						if (h) {
+							s.css("height", mh ? mh > h ? mh : h : h);
+						}
+					})
+					.trigger("resize");
 			}
 		}
 
@@ -881,11 +887,11 @@
 			var isogroup = [];
 			for (var i = 0; i < plugins.isotope.length; i++) {
 				var isotopeItem = plugins.isotope[i],
-						isotopeInitAttrs = {
-							itemSelector: '.isotope-item',
-							layoutMode: isotopeItem.getAttribute('data-isotope-layout') ? isotopeItem.getAttribute('data-isotope-layout') : 'masonry',
-							filter: '*'
-						};
+					isotopeInitAttrs = {
+						itemSelector: '.isotope-item',
+						layoutMode: isotopeItem.getAttribute('data-isotope-layout') ? isotopeItem.getAttribute('data-isotope-layout') : 'masonry',
+						filter: '*'
+					};
 
 				if (isotopeItem.getAttribute('data-column-width')) {
 					isotopeInitAttrs.masonry = {
@@ -918,11 +924,11 @@
 				filter.parents(".isotope-filters").find('.active').removeClass("active");
 				filter.addClass("active");
 				var iso = $('.isotope[data-isotope-group="' + this.getAttribute("data-isotope-group") + '"]'),
-						isotopeAttrs = {
-							itemSelector: '.isotope-item',
-							layoutMode: iso.attr('data-isotope-layout') ? iso.attr('data-isotope-layout') : 'masonry',
-							filter: this.getAttribute("data-isotope-filter") === '*' ? '*' : '[data-filter*="' + this.getAttribute("data-isotope-filter") + '"]'
-						};
+					isotopeAttrs = {
+						itemSelector: '.isotope-item',
+						layoutMode: iso.attr('data-isotope-layout') ? iso.attr('data-isotope-layout') : 'masonry',
+						filter: this.getAttribute("data-isotope-filter") === '*' ? '*' : '[data-filter*="' + this.getAttribute("data-isotope-filter") + '"]'
+					};
 				if (iso.attr('data-column-width')) {
 					isotopeAttrs.masonry = {
 						columnWidth: parseFloat(iso.attr('data-column-width'))
@@ -955,7 +961,7 @@
 		if (plugins.mailchimp.length) {
 			for (i = 0; i < plugins.mailchimp.length; i++) {
 				var $mailchimpItem = $(plugins.mailchimp[i]),
-						$email = $mailchimpItem.find('input[type="email"]');
+					$email = $mailchimpItem.find('input[type="email"]');
 
 				// Required by MailChimp
 				$mailchimpItem.attr('novalidate', 'true');
@@ -967,9 +973,9 @@
 					var $this = this;
 
 					var data = {},
-							url = $this.attr('action').replace('/post?', '/post-json?').concat('&c=?'),
-							dataArray = $this.serializeArray(),
-							$output = $("#" + $this.attr("data-form-output"));
+						url = $this.attr('action').replace('/post?', '/post-json?').concat('&c=?'),
+						dataArray = $this.serializeArray(),
+						$output = $("#" + $this.attr("data-form-output"));
 
 					for (i = 0; i < dataArray.length; i++) {
 						data[dataArray[i].name] = dataArray[i].value;
@@ -1048,10 +1054,10 @@
 
 				$campaignItem.on('submit', $.proxy(function (e) {
 					var data = {},
-							url = this.attr('action'),
-							dataArray = this.serializeArray(),
-							$output = $("#" + plugins.campaignMonitor.attr("data-form-output")),
-							$this = $(this);
+						url = this.attr('action'),
+						dataArray = this.serializeArray(),
+						$output = $("#" + plugins.campaignMonitor.attr("data-form-output")),
+						$this = $(this);
 
 					for (i = 0; i < dataArray.length; i++) {
 						data[dataArray[i].name] = dataArray[i].value;
@@ -1100,19 +1106,19 @@
 		// RD Mailform
 		if (plugins.rdMailForm.length) {
 			var i, j, k,
-					msg = {
-						'MF000': 'Successfully sent!',
-						'MF001': 'Recipients are not set!',
-						'MF002': 'Form will not work locally!',
-						'MF003': 'Please, define email field in your form!',
-						'MF004': 'Please, define type of your form!',
-						'MF254': 'Something went wrong with PHPMailer!',
-						'MF255': 'Aw, snap! Something went wrong.'
-					};
+				msg = {
+					'MF000': 'Successfully sent!',
+					'MF001': 'Recipients are not set!',
+					'MF002': 'Form will not work locally!',
+					'MF003': 'Please, define email field in your form!',
+					'MF004': 'Please, define type of your form!',
+					'MF254': 'Something went wrong with PHPMailer!',
+					'MF255': 'Aw, snap! Something went wrong.'
+				};
 
 			for (i = 0; i < plugins.rdMailForm.length; i++) {
 				var $form = $(plugins.rdMailForm[i]),
-						formHasCaptcha = false;
+					formHasCaptcha = false;
 
 				$form.attr('novalidate', 'novalidate').ajaxForm({
 					data: {
@@ -1124,10 +1130,10 @@
 							return;
 
 						var form = $(plugins.rdMailForm[this.extraData.counter]),
-								inputs = form.find("[data-constraints]"),
-								output = $("#" + form.attr("data-form-output")),
-								captcha = form.find('.recaptcha'),
-								captchaFlag = true;
+							inputs = form.find("[data-constraints]"),
+							output = $("#" + form.attr("data-form-output")),
+							captcha = form.find('.recaptcha'),
+							captchaFlag = true;
 
 						output.removeClass("active error success");
 
@@ -1136,36 +1142,36 @@
 							// veify reCaptcha
 							if (captcha.length) {
 								var captchaToken = captcha.find('.g-recaptcha-response').val(),
-										captchaMsg = {
-											'CPT001': 'Please, setup you "site key" and "secret key" of reCaptcha',
-											'CPT002': 'Something wrong with google reCaptcha'
-										};
+									captchaMsg = {
+										'CPT001': 'Please, setup you "site key" and "secret key" of reCaptcha',
+										'CPT002': 'Something wrong with google reCaptcha'
+									};
 
 								formHasCaptcha = true;
 
 								$.ajax({
 									method: "POST",
 									url: "bat/reCaptcha.php",
-									data: {'g-recaptcha-response': captchaToken},
+									data: { 'g-recaptcha-response': captchaToken },
 									async: false
 								})
-								.done(function (responceCode) {
-									if (responceCode !== 'CPT000') {
-										if (output.hasClass("snackbars")) {
-											output.html('<p><span class="icon text-middle mdi mdi-check icon-xxs"></span><span>' + captchaMsg[responceCode] + '</span></p>')
+									.done(function (responceCode) {
+										if (responceCode !== 'CPT000') {
+											if (output.hasClass("snackbars")) {
+												output.html('<p><span class="icon text-middle mdi mdi-check icon-xxs"></span><span>' + captchaMsg[responceCode] + '</span></p>')
 
-											setTimeout(function () {
-												output.removeClass("active");
-											}, 3500);
+												setTimeout(function () {
+													output.removeClass("active");
+												}, 3500);
 
-											captchaFlag = false;
-										} else {
-											output.html(captchaMsg[responceCode]);
+												captchaFlag = false;
+											} else {
+												output.html(captchaMsg[responceCode]);
+											}
+
+											output.addClass("active");
 										}
-
-										output.addClass("active");
-									}
-								});
+									});
 							}
 
 							if (!captchaFlag) {
@@ -1187,7 +1193,7 @@
 							return;
 
 						var output = $("#" + $(plugins.rdMailForm[this.extraData.counter]).attr("data-form-output")),
-								form = $(plugins.rdMailForm[this.extraData.counter]);
+							form = $(plugins.rdMailForm[this.extraData.counter]);
 
 						output.text(msg[result]);
 						form.removeClass('form-in-process');
@@ -1201,12 +1207,12 @@
 							return;
 
 						var form = $(plugins.rdMailForm[this.extraData.counter]),
-								output = $("#" + form.attr("data-form-output")),
-								select = form.find('select');
+							output = $("#" + form.attr("data-form-output")),
+							select = form.find('select');
 
 						form
-						.addClass('success')
-						.removeClass('form-in-process');
+							.addClass('success')
+							.removeClass('form-in-process');
 
 						if (formHasCaptcha) {
 							grecaptcha.reset();
@@ -1261,8 +1267,8 @@
 				if ($this.attr("data-custom-toggle-hide-on-blur") === "true") {
 					$body.on("click", $this, function (e) {
 						if (e.target !== e.data[0]
-								&& $(e.data.attr('data-custom-toggle')).find($(e.target)).length
-								&& e.data.find($(e.target)).length === 0) {
+							&& $(e.data.attr('data-custom-toggle')).find($(e.target)).length
+							&& e.data.find($(e.target)).length === 0) {
 							$(e.data.attr('data-custom-toggle')).add(e.data[0]).removeClass('active');
 						}
 					})
@@ -1335,7 +1341,7 @@
 			} else {
 				for (var i = 0; i < plugins.materialParallax.length; i++) {
 					var parallax = $(plugins.materialParallax[i]),
-							imgPath = parallax.data("parallax-img");
+						imgPath = parallax.data("parallax-img");
 
 					parallax.css({
 						"background-image": 'url(' + imgPath + ')',
@@ -1346,8 +1352,8 @@
 		}
 
 		// Google maps
-		if( plugins.maps.length ) {
-			lazyInit( plugins.maps, initMaps );
+		if (plugins.maps.length) {
+			lazyInit(plugins.maps, initMaps);
 		}
 
 	});
