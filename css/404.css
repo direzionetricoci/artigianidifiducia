@@ -1,94 +1,184 @@
-@import url("https://fonts.googleapis.com/css?family=Nunito+Sans");
-:root {
-  --blue: #0e0620;
-  --white: #fff;
-  --green: #0099dd;
-}
-
-html,
-body {
-  height: 100%;
-}
-
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Nunito Sans";
-  color: var(--blue);
-  font-size: 1em;
-}
-
-button {
-  font-family: "Nunito Sans";
-}
-
-ul {
-  list-style-type: none;
-  -webkit-padding-start: 35px;
-          padding-inline-start: 35px;
-}
-
-svg {
-  width: 100%;
-  visibility: hidden;
-}
-
-h1 {
-  font-size: 7.5em;
-  margin: 15px 0px;
-  font-weight: bold;
-}
-
-h2 {
-  font-weight: bold;
-}
-
-.btn {
-  z-index: 1;
-  overflow: hidden;
-  background: transparent;
-  position: relative;
-  padding: 8px 50px;
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 1em;
-  letter-spacing: 2px;
-  transition: 0.2s ease;
-  font-weight: bold;
-  margin: 5px 0px;
-}
-.btn.green {
-  border: 4px solid var(--green);
-  color: var(--blue);
-}
-.btn.green:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 0%;
-  height: 100%;
-  background: var(--green);
-  z-index: -1;
-  transition: 0.2s ease;
-}
-.btn.green:hover {
-  color: var(--white);
-  background: var(--green);
-  transition: 0.2s ease;
-}
-.btn.green:hover:before {
-  width: 100%;
-}
-
-@media screen and (max-width: 768px) {
-  body {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: #f0faff; /* sfondo azzurro chiarissimo */
+    color: #004466; /* testo principale coerente con #0099dd */
+    overflow: hidden;
+  }
+  
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 40px 20px;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1100px;
+    width: 100%;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  
+  .text-area {
+    max-width: 440px;
+    flex: 1;
+  }
+  
+  .text-area h1 {
+    font-size: 3.6rem;
+    line-height: 1.2;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #0099dd;
+  }
+  
+  .text-area h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+  }
+  
+  .text-area p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 35px;
+  }
+  
+  .btn {
+    display: inline-block;
+    text-align: center;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 24px;
+    border-radius: 0;
+    border: 0;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    transition: background 0.4s, border-color 0.4s, color 0.4s;
+    padding: 9px 28px;
+    background-color: #e0f4ff;
+    color: #004466;
+    border-color: #e0f4ff;
+  }
+  
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0099dd;
+    z-index: -1;
+    opacity: 0;
+    transform: scale3d(0.7, 1, 1);
+    transition: transform 0.4s, opacity 0.4s;
+  }
+  
+  .btn:hover::before {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+  
+  .btn:hover {
+    color: #fff;
+    border-color: #0099dd;
+  }
+  
+  .image-area {
+    flex: 1;
+    max-width: 540px;
+    min-width: 280px;
+  }
+  
+  .image-area object {
+    width: 100%;
+    height: auto;
     display: block;
   }
-
-  .container {
-    margin-top: 70px;
-    margin-bottom: 70px;
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .content {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 30px;
+    }
+  
+    .text-area h1 {
+      font-size: 2.4rem;
+    }
+  
+    .text-area h2 {
+      font-size: 1.5rem;
+    }
+  
+    .text-area p {
+      font-size: 1rem;
+    }
+  
+    .btn {
+      font-size: 1rem;
+      padding: 14px 28px;
+    }
   }
+  
+
+/* Stile del bottone Torna alla Home, estratto da style.css */
+.button {
+  display: inline-block;
+  text-align: center;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 24px;
+  border-radius: 0;
+  border: 0;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  transition: background 0.4s, border-color 0.4s, color 0.4s;
+  padding: 9px 28px;
+  background-color: #ebebeb;
+  color: #151515;
+  border-color: #ebebeb;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0099dd;
+  z-index: -1;
+  opacity: 0;
+  transform: scale3d(0.7, 1, 1);
+  transition: transform 0.4s, opacity 0.4s;
+}
+
+.button:hover::before {
+  opacity: 1;
+  transform: scale3d(1, 1, 1);
+}
+
+.button:hover {
+  color: #fff;
+  border-color: #0099dd;
 }
