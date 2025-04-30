@@ -212,7 +212,7 @@
 			// Custom validator - phone number
 			regula.custom({
 				name: 'PhoneNumber',
-				defaultMessage: 'Invalid phone number format',
+				defaultMessage: 'Formato del numero di telefono non valido',
 				validator: function () {
 					if (this.value === '') return true;
 					else return /^(\+\d)?[0-9\-\(\) ]{5,}$/i.test(this.value);
@@ -244,19 +244,19 @@
 			var regularConstraintsMessages = [
 				{
 					type: regula.Constraint.Required,
-					newMessage: "The text field is required."
+					newMessage: "Il campo di testo è obbligatorio."
 				},
 				{
 					type: regula.Constraint.Email,
-					newMessage: "The email is not a valid email."
+					newMessage: "L'e-mail non è valida."
 				},
 				{
 					type: regula.Constraint.Numeric,
-					newMessage: "Only numbers are required"
+					newMessage: "Sono richiesti solo i numeri."
 				},
 				{
 					type: regula.Constraint.Selected,
-					newMessage: "Please choose an option."
+					newMessage: "Scegliere un'opzione."
 				}
 			];
 
