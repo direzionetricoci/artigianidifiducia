@@ -1,12 +1,15 @@
 <?php
 
-$formConfigFile = file_get_contents("rd-mailform.config.json");
+// $formConfigFile = file_get_contents("rd-mailform.config.json");
+$baseDir        = __DIR__;
+$formConfigFile = file_get_contents($baseDir . '/rd-mailform.config.json');
 $formConfig = json_decode($formConfigFile, true);
 
 date_default_timezone_set('Etc/UTC');
 
 try {
-    require './phpmailer/PHPMailerAutoload.php';
+    // require './phpmailer/PHPMailerAutoload.php';
+    require $baseDir . '/phpmailer/PHPMailerAutoload.php';
 
     $recipients = $formConfig['recipientEmail'];
 
@@ -26,11 +29,12 @@ try {
         return $_SERVER['REMOTE_ADDR'];
     }
 
-    if (preg_match('/^(127\.|192\.168\.|::1)/', getRemoteIPAddress())) {
-        die('MF002');
-    }
+    // if (preg_match('/^(127\.|192\.168\.|::1)/', getRemoteIPAddress())) {
+    //     die('MF002');
+    // }
 
-    $template = file_get_contents('rd-mailform.tpl');
+    // $template = file_get_contents('rd-mailform.tpl');
+    $template = file_get_contents($baseDir . '/rd-mailform.tpl');
 
     if (isset($_POST['form-type'])) {
         switch ($_POST['form-type']){
@@ -94,7 +98,7 @@ try {
         // 0 = off (for production use)
         // 1 = client messages
         // 2 = client and server messages
-        $mail->SMTPDebug = 0;
+        $mail->SMTPDebug = 2;
 
         $mail->Debugoutput = 'html';
 
@@ -115,7 +119,7 @@ try {
         $mail->Password = $formConfig['password'];
     }
 
-    $mail->From = $_POST['email'];
+    $mail->setFrom($formConfig['username'], 'Artigiani di Fiducia');
 
     # Attach file
     if (isset($_FILES['file']) &&
@@ -124,10 +128,17 @@ try {
             $_FILES['file']['name']);
     }
 
-    if (isset($_POST['name'])){
-        $mail->FromName = $_POST['name'];
-    }else{
-        $mail->FromName = "Site Visitor";
+    // if (isset($_POST['name'])){
+    //     $mail->FromName = $_POST['name'];
+    // }else{
+    //     $mail->FromName = "Site Visitor";
+    // }
+
+    if (!empty($_POST['email'])) {
+        $mail->addReplyTo(
+        $_POST['email'],
+        !empty($_POST['name']) ? $_POST['name'] : 'Visitatore'
+        );
     }
 
     foreach ($addresses[0] as $key => $value) {

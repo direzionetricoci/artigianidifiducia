@@ -87,10 +87,11 @@
                 <p>Vuoi richiedere un preventivo, un sopralluogo o semplicemente avere maggiori informazioni sui nostri servizi? Compila il modulo qui sotto o scrivici su WhatsApp e ti risponderemo al più presto!</p>
                 <!-- RD Mailform-->
                 <form class="rd-mailform" data-form-output="form-output-global" data-form-type="contact" method="post" action="/bat/rd-mailform.php">
+                  <input type="hidden" name="form-type" value="contact">
                   <div class="row align-items-md-end row-20">
                     <div class="col-md-6">
                       <div class="form-wrap">
-                        <input class="form-input" id="contact-first-name" type="text" name="first-name" data-constraints="@Required">
+                        <input class="form-input" id="contact-first-name" type="text" name="name" data-constraints="@Required">
                         <label class="form-label" for="contact-first-name">Nome e Cognome</label>
                       </div>
                     </div>
